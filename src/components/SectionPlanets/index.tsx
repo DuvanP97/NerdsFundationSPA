@@ -7,9 +7,14 @@ const SectionPlanets = (): JSX.Element => {
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              <a
+              href="planets"
+              className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              >
+                <h2 className="text-3xl font-bold tracking-tight text-black sm:text-4xl">
               StarWars Planets
-            </h2>
+                </h2>
+              </a>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               The fictional universe of the Star Wars franchise features multiple planets and moons.
             </p>
@@ -29,7 +34,7 @@ const SectionPlanets = (): JSX.Element => {
                     <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                       {planet.name}
                     </h3>
-                    <p className="text-sm font-semibold leading-6 text-indigo-600">
+                    <p className="text-sm font-semibold leading-6 text-gray-800">
                       {planet.role}
                     </p>
                   </div>
