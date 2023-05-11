@@ -6,6 +6,8 @@ import Characters from "./pages/Characters";
 import DetailCharacter from "./pages/Characters/DetailCharacter";
 import Planets from "./pages/Planets";
 import DetailPlanet from "./pages/Planets/DetailPlanet";
+import DetailShip from "./pages/Ships/DetailShip";
+import Ships from "./pages/Ships";
 
 const App = (): JSX.Element => {
   return (
@@ -18,7 +20,8 @@ const App = (): JSX.Element => {
           <Route path="character-detail" element={<DetailCharacter />} />
           <Route path="planets" element={<Planets />} />
           <Route path="planet-detail" element={<DetailPlanet />} />
-          <Route path="ships" element={<Home />} />
+          <Route path="ships" element={<Ships />} />
+          <Route path="ship-detail" element={<DetailShip />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

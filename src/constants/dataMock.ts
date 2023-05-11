@@ -280,6 +280,93 @@ export const characters = [
   },
 ]
 
+export const shipsData = [
+  {
+    name: 'Luke Skywalker',
+    description: '19 BBY',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/1.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Self-Improvement',
+    description: 'Journals and note-taking',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/2.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Travel',
+    description: 'Daily commute essentials',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/3.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Desk and Office',
+    description: 'Work from home accessories',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/4.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Self-Improvement',
+    description: 'Journals and note-taking',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/5.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Travel',
+    description: 'Daily commute essentials',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/6.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Desk and Office',
+    description: 'Work from home accessories',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/7.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Self-Improvement',
+    description: 'Journals and note-taking',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/8.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Travel',
+    description: 'Daily commute essentials',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/9.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Desk and Office',
+    description: 'Work from home accessories',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/10.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Self-Improvement',
+    description: 'Journals and note-taking',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/11.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+  {
+    name: 'Travel',
+    description: 'Daily commute essentials',
+    imageSrc: 'https://starwars-visualguide.com/assets/img/starships/12.jpg',
+    imageAlt: 'NO IMAGE',
+    href: 'ship-detail',
+  },
+]
+
 export const dataCharacter = [
   {
     name: 'Push to deploy.',
