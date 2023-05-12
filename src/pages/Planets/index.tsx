@@ -1,10 +1,42 @@
 import * as React from "react";
 import Header from '../../components/Header/Header'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
-import { planetsData } from "../../constants/dataMock";
+import { GetPlanetsListThunk } from '../../actions/Thunks/PlanetsThunk';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const Planets = (): JSX.Element => {
-  const objectData = planetsData.slice(0, 6);
+  const dispatch = useAppDispatch();
+
+  const planets = useAppSelector((state) => state.planetsData.planetsData);
+  
+  const [page, setPage] = React.useState('1');
+  const [filtro, setFiltro] = React.useState('');
+  const [listFilter, setListFilter] = React.useState(planets.results);
+
+  const pageQuantity = Math.ceil((planets.count/10) * 1) / 1
+  const numerInt = parseInt(page)
+  const mapPagination = Array.from({ length: pageQuantity }, (_, index) => index + 1);
+  
+  const getPlanetsList = React.useCallback(async () => {
+    const planets = await dispatch(GetPlanetsListThunk(page));
+    if (GetPlanetsListThunk.rejected.match(planets)) {
+      console.error(planets.payload as string);
+    }
+  }, [dispatch, page]);
+
+  React.useEffect(() => {
+    if (filtro === '') {
+      setListFilter(planets.results)
+    }else {
+      const  resultFilter =planets.results.filter((x: IDataPlanets)  => x.name.toLowerCase().includes(filtro.toLowerCase()))
+      setListFilter(resultFilter)
+    }
+    
+  }, [planets.results, filtro]);
+
+  React.useEffect(() => {
+    getPlanetsList();
+  }, [getPlanetsList]);
+
   return (
     <React.Fragment>
       <Header/>
@@ -13,84 +45,87 @@ const Planets = (): JSX.Element => {
           <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
             <h2 className="text-2xl font-bold text-gray-900">PLANETS</h2>
             <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-              {objectData.map((planet: IDataDetail) => (
-                <div key={planet.name} className="group relative">
-                  <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
-                    <img
-                      src={planet.imageSrc}
-                      alt={planet.imageAlt}
-                      className="h-full w-full object-cover object-center"
-                    />
+              {listFilter !== undefined &&
+              listFilter.map((planet: IDataPlanets) => (
+                <a href={"planet-detail/"+planet.url.match(/\d+/g)}>
+                  <div key={planet.name} className="group relative">
+                    <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+                      <img
+                        className="h-full w-full object-cover object-center"
+                        src={"https://starwars-visualguide.com/assets/img/planets/"+planet.url.match(/\d+/g)+".jpg"}
+                        alt="SIN IMAGEN"
+                      />
+                    </div>
+                    <h3 className="mt-6 text-sm text-gray-500">
+                        <span className="absolute inset-0" />
+                        {planet.name}
+                    </h3>
+                    <p className="text-base font-semibold text-gray-900">{planet.population}</p>
+                    <br />
                   </div>
-                  <h3 className="mt-6 text-sm text-gray-500">
-                    <a href={planet.href}>
-                      <span className="absolute inset-0" />
-                      {planet.name}
-                    </a>
-                  </h3>
-                  <p className="text-base font-semibold text-gray-900">{planet.description}</p>
-                  <br />
-                </div>
+                </a>
               ))} 
             </div>
           </div>
         </div>
       </div>
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+      <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+        <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            autoComplete="username"
+            className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+            value={filtro}
+            onChange={(e) => setFiltro(e.target.value)}
+            placeholder="Filter by name"
+          />
+          <div>
+            <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+              {mapPagination.map((index: number, key: number) => (
+                <button
+                className="relative z-10 inline-flex items-center bg-gray-600 px-4 py-2 text-sm font-semibold text-white"
+                onClick={() => setPage((key+1).toString())}
+                >
+                  {key+1}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </div>
       <div className="flex flex-1 justify-between sm:hidden">
-        <a
-          href="/"
-          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-          Previous
-        </a>
-        <a
-          href="/"
-          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-        >
-          Next
-        </a>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            autoComplete="username"
+            className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+            value={filtro}
+            onChange={(e) => setFiltro(e.target.value)}
+            placeholder="Filter by name"
+          />
       </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to <span className="font-medium">6</span> of{' '}
-            <span className="font-medium">{planetsData.length}</span> results
-          </p>
-        </div>
-        <div>
-          <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-            <a
-              href="/"
-              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Previous</span>
-              <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
-            <a
-              href="/"
-              aria-current="page"
-              className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              1
-            </a>
-            <a
-              href="/"
-              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              2
-            </a>
-            <a
-              href="/"
-              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Next</span>
-              <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
-          </nav>
-        </div>
+      <div className="flex flex-1 justify-between sm:hidden">
+        {page !== '1' &&
+          <button
+            onClick={() => {setPage((numerInt - 1).toString())}}
+            className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Previous
+          </button>
+        }
+        {numerInt <= pageQuantity &&
+          <button
+            onClick={() => {setPage((numerInt + 1).toString())}}
+            className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Next
+          </button>
+        }
       </div>
-    </div>
+      <br />
     </React.Fragment>
   )
 }
