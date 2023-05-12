@@ -2,6 +2,7 @@ import * as React from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { navigation } from "../../constants/dataMock"
+import { Link } from "react-router-dom";
 
 const Header = (): JSX.Element => {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -77,13 +78,14 @@ const Header = (): JSX.Element => {
                             <div className="-my-6 divide-y divide-gray-500/10">
                                 <div className="space-y-2 py-6">
                                 {navigation.map((item) => (
+                                    <Link to={item.href}>
                                     <a
                                     key={item.name}
                                     href={item.href}
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     >
                                     {item.name}
-                                    </a>
+                                    </a></Link>
                                 ))}
                                 </div>
                                 <div className="py-6">

@@ -1,5 +1,7 @@
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 
+export const API_URL = 'https://swapi.dev/api/';
+
 export const navigation = [
     { name: "Home", href: "/" },
     { name: "Persons", href: "characters" },

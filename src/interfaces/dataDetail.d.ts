@@ -5,3 +5,9 @@ declare interface IDataDetail {
     imageAlt: string,
     href: string,
   }
+
+  declare interface IHttpResponse<T> {
+    okay: boolean;
+    message: string;
+    data: T | null;
+  }

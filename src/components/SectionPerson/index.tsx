@@ -1,7 +1,24 @@
 import * as React from "react";
-import { people } from "../../constants/dataMock";
+import { GetCharacterListThunk } from '../../actions/Thunks/CharacterThunk';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const SectionPerson = (): JSX.Element => {
+    const dispatch = useAppDispatch();
+    const characters = useAppSelector((state) => state.characterData.charactersData);
+
+    const objectData = characters.results.slice(0, 6);
+
+    const getCharacterList = React.useCallback(async () => {
+      const characters = await dispatch(GetCharacterListThunk(null));
+      if (GetCharacterListThunk.rejected.match(characters)) {
+        console.error(characters.payload as string);
+      }
+    }, [dispatch]);
+  
+    React.useEffect(() => {
+      getCharacterList();
+    }, [getCharacterList]);
+
   return (
     <React.Fragment>
       <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
@@ -21,27 +38,26 @@ const SectionPerson = (): JSX.Element => {
                       Star Wars universe.
                       </p>
                   </div>
-                  <ul
-                      className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-                  >
-                      {people.map((person) => (
-                      <li key={person.name}>
-                          <div className="flex items-center gap-x-6">
-                          <img
-                              className="h-16 w-16 rounded-full"
-                              src={person.imageUrl}
-                              alt="SIN IMAGEN"
-                          />
-                          <div>
-                              <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-100">
-                              {person.name}
-                              </h3>
-                              <p className="text-sm font-semibold leading-6 text-gray-400">
-                              {person.role}
-                              </p>
-                          </div>
-                          </div>
-                      </li>
+                  <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2" >
+                      {objectData !== undefined &&
+                        objectData.map((person: any, key: any) => (
+                        <li key={person.name}>
+                            <div className="flex items-center gap-x-6">
+                            <img
+                                className="h-16 w-16 rounded-full"
+                                src={"https://starwars-visualguide.com/assets/img/characters/"+(key+1)+".jpg"}
+                                alt="SIN IMAGEN"
+                            />
+                            <div>
+                                <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-100">
+                                {person.name}
+                                </h3>
+                                <p className="text-sm font-semibold leading-6 text-gray-400">
+                                {person.birth_year}
+                                </p>
+                            </div>
+                            </div>
+                        </li>
                       ))}
                   </ul>
               </div>
