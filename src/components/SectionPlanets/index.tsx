@@ -4,12 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const SectionPlanets = (): JSX.Element => {
     const dispatch = useAppDispatch();
+
     const planets = useAppSelector((state) => state.planetsData.planetsData);
 
     const objectData = planets.results.slice(0, 6);
 
     const getPlanetsList = React.useCallback(async () => {
-      const planets = await dispatch(GetPlanetsListThunk());
+      const planets = await dispatch(GetPlanetsListThunk(null));
       if (GetPlanetsListThunk.rejected.match(planets)) {
         console.error(planets.payload as string);
       }
@@ -40,7 +41,7 @@ const SectionPlanets = (): JSX.Element => {
             className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
           >
           {objectData !== undefined &&
-            objectData.map((planet: any, key: any) => (
+            objectData.map((planet: IDataPlanets, key: number) => (
               <li key={planet.name}>
                 <div className="flex items-center gap-x-6 ">
                     <img
