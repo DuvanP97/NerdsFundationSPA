@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GetPlanetsListThunk } from '../../actions/Thunks/PlanetsThunk';
+import { GetPlanetThunk, GetPlanetsListThunk } from '../../actions/Thunks/PlanetsThunk';
 
 const PLANETS = 'PLANETS';
 
 const initialState: any = {
   planet: null,
+  planetDetail: null,
 };
 
-const heroesSlice = createSlice({
+const planetsSlice = createSlice({
   name: PLANETS,
   initialState,
   reducers: {},
@@ -15,7 +16,10 @@ const heroesSlice = createSlice({
     builder.addCase(GetPlanetsListThunk.fulfilled, (state, { payload }) => {
       state.planetsData = payload;
     });
+    builder.addCase(GetPlanetThunk.fulfilled, (state, { payload }) => {
+      state.planetDetail = payload;
+    });
   },
 });
 
-export default heroesSlice.reducer;
+export default planetsSlice.reducer;

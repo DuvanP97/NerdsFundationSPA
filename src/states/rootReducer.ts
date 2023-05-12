@@ -9,7 +9,9 @@ export const appReducer = combineReducers({
   characterData: characterSlice,
   characterDetail: characterSlice,
   planetsData: planetSlice,
+  planetsDetail: planetSlice,
   shipsData: shipsSlice,
+  shipsDetail: shipsSlice,
 });
 
 export const persistConfig = {
