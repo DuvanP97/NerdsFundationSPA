@@ -1,7 +1,25 @@
 import * as React from "react";
-import { planets } from "../../constants/dataMock";
+import { GetPlanetsListThunk } from '../../actions/Thunks/PlanetsThunk';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const SectionPlanets = (): JSX.Element => {
+    const dispatch = useAppDispatch();
+
+    const planets = useAppSelector((state) => state.planetsData.planetsData);
+
+    const objectData = planets.results.slice(0, 6);
+
+    const getPlanetsList = React.useCallback(async () => {
+      const planets = await dispatch(GetPlanetsListThunk(null));
+      if (GetPlanetsListThunk.rejected.match(planets)) {
+        console.error(planets.payload as string);
+      }
+    }, [dispatch]);
+  
+    React.useEffect(() => {
+      getPlanetsList();
+    }, [getPlanetsList]);
+
   return (
     <React.Fragment>
       <div className="bg-white py-24 sm:py-32">
@@ -22,21 +40,19 @@ const SectionPlanets = (): JSX.Element => {
           <ul
             className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
           >
-            {planets.map((planet) => (
+          {objectData !== undefined &&
+            objectData.map((planet: IDataPlanets, key: number) => (
               <li key={planet.name}>
                 <div className="flex items-center gap-x-6 ">
                     <img
-                      className="h-16 w-16 rounded-full "
-                      src={planet.imageUrl}
-                      alt="SIN IMAGEN"
-                      />
+                        className="h-16 w-16 rounded-full"
+                        src={"https://starwars-visualguide.com/assets/img/planets/"+(key+1)+".jpg"}
+                        alt="SIN IMAGEN"
+                    />
                   <div>
                     <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                       {planet.name}
                     </h3>
-                    <p className="text-sm font-semibold leading-6 text-gray-800">
-                      {planet.role}
-                    </p>
                   </div>
                 </div>
               </li>
