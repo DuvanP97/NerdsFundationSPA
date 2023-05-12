@@ -7,6 +7,7 @@ import SectionShips from "../../components/SectionShips";
 
 
 const Home = (): JSX.Element => {
+  
 
   return (
     <React.Fragment>

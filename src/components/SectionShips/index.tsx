@@ -1,7 +1,26 @@
 import * as React from "react";
-import { ships } from "../../constants/dataMock";
+import { GetShipsListThunk } from '../../actions/Thunks/ShipsThunk';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const SectionShips = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const ships = useAppSelector((state) => state.shipsData.shipsData);
+
+  
+  const objectData = ships.results.slice(0, 6);
+  
+  console.log('ships', objectData)
+  const getShipsList = React.useCallback(async () => {
+    const Ships = await dispatch(GetShipsListThunk());
+    if (GetShipsListThunk.rejected.match(Ships)) {
+      console.error(Ships.payload as string);
+    }
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    getShipsList();
+  }, [getShipsList]);
+
   return (
     <React.Fragment>
       <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
@@ -23,13 +42,14 @@ const SectionShips = (): JSX.Element => {
             <ul
               className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
             >
-              {ships.map((ship) => (
+              {objectData !== undefined &&
+                objectData.map((ship: any, key: any) => (
                 <li key={ship.name}>
                   <div className="flex items-center gap-x-6">
                     <img
-                      className="h-16 w-16 rounded-full"
-                      src={ship.imageUrl}
-                      alt="SIN IMAGEN"
+                        className="h-16 w-16 rounded-full"
+                        src={"https://starwars-visualguide.com/assets/img/starships/"+(key+1)+".jpg"}
+                        alt="SIN IMAGEN"
                     />
                     <div>
                       <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-200">
