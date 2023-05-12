@@ -34,7 +34,6 @@ export async function GetCharacter(id: string): Promise<IDataCharacters> {
       `${API_URL}people/${id}/`
     );
     if (Character.okay && Character.data) {
-      console.log('test', Character.data)
       return Character.data;
     } else {
       throw Error(Character.message);
