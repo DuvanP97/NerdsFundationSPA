@@ -27,8 +27,7 @@ const Characters = (): JSX.Element => {
     if (filtro === '') {
       setListFilter(characters.results)
     }else {
-      const  resultFilter =characters.results.filter((x: any)  => x.name.toLowerCase().includes(filtro.toLowerCase()))
-      console.log('test', resultFilter)
+      const  resultFilter =characters.results.filter((x: IDataCharacters)  => x.name.toLowerCase().includes(filtro.toLowerCase()))
       setListFilter(resultFilter)
     }
     
@@ -47,7 +46,7 @@ const Characters = (): JSX.Element => {
             <h2 className="text-2xl font-bold text-gray-900">CHARACTERS</h2>
             <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
               {listFilter !== undefined &&
-                listFilter.map((person: any) => (
+                listFilter.map((person: IDataCharacters) => (
                 <a href={"character-detail/"+person.url.match(/\d+/g)}>
                   <div key={person.name} className="group relative">
                     <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
@@ -61,7 +60,6 @@ const Characters = (): JSX.Element => {
                         <span className="absolute inset-0" />
                         {person.name}
                     </h3>
-                    
                     <p className="text-base font-semibold text-gray-900">{person.birth_year}</p>
                     <br />
                   </div>
@@ -81,14 +79,14 @@ const Characters = (): JSX.Element => {
             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
             value={filtro}
             onChange={(e) => setFiltro(e.target.value)}
-            placeholder="Filtrar por nombre"
+            placeholder="Filter by name"
           />
           <div>
             <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-              {mapPagination.map((index: any, key: any) => (
+              {mapPagination.map((index: number, key: number,) => (
                 <button
-                className="relative z-10 inline-flex items-center bg-gray-600 px-4 py-2 text-sm font-semibold text-white"
-                onClick={() => setPage(key+1)}
+                  className="relative z-10 inline-flex items-center bg-gray-600 px-4 py-2 text-sm font-semibold text-white"
+                  onClick={() => setPage((key+1).toString())}
                 >
                   {key+1}
                 </button>
@@ -106,7 +104,7 @@ const Characters = (): JSX.Element => {
             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
             value={filtro}
             onChange={(e) => setFiltro(e.target.value)}
-            placeholder="Filtrar por nombre"
+            placeholder="Filter by name"
           />
       </div>
       <div className="flex flex-1 justify-between sm:hidden">

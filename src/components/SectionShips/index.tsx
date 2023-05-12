@@ -4,14 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 const SectionShips = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  
   const ships = useAppSelector((state) => state.shipsData.shipsData);
 
-  
   const objectData = ships.results.slice(0, 6);
   
-  console.log('ships', objectData)
   const getShipsList = React.useCallback(async () => {
-    const Ships = await dispatch(GetShipsListThunk());
+    const Ships = await dispatch(GetShipsListThunk(null));
     if (GetShipsListThunk.rejected.match(Ships)) {
       console.error(Ships.payload as string);
     }
@@ -43,7 +42,7 @@ const SectionShips = (): JSX.Element => {
               className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
             >
               {objectData !== undefined &&
-                objectData.map((ship: any, key: any) => (
+                objectData.map((ship: IDataShips, key: number) => (
                 <li key={ship.name}>
                   <div className="flex items-center gap-x-6">
                     <img
@@ -56,7 +55,7 @@ const SectionShips = (): JSX.Element => {
                         {ship.name}
                       </h3>
                       <p className="text-sm font-semibold leading-6 text-gray-400">
-                        {ship.role}
+                        {ship.passengers}
                       </p>
                     </div>
                   </div>

@@ -8,7 +8,7 @@ const initialState: any = {
   characterDetail: null,
 };
 
-const heroesSlice = createSlice({
+const charactersSlice = createSlice({
   name: CHARACTER,
   initialState,
   reducers: {},
@@ -22,4 +22,4 @@ const heroesSlice = createSlice({
   },
 });
 
-export default heroesSlice.reducer;
+export default charactersSlice.reducer;
