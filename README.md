@@ -47,3 +47,55 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+# Landing Page
+
+_project with the purpose of using [API StarWars](https://swapi.dev/)_
+
+# Contains
+
+_HOME Characters, Planets, Starships_
+
+#
+
+_All the Star Wars data you've ever wanted: Planets, Spaceships, Vehicles, People, Films and Species From all SEVEN Star Wars films Now with The Force Awakens data!._
+
+# How can I use it?
+
+_All the data is accessible through our HTTP web API. Consult our documentation if you'd like to get started._
+
+_Helper libraries for popular programming languages are also provided so you can consume swapi in your favourite programming language, in a style that suits you._
+
+# Branches created during the creation of the project
+
+    -main
+    -develop
+    -features
+
+![enter image description here](https://github.com/DuvanP97/api-super-heroes-catalog/blob/main/Captura%20de%20pantalla%202023-05-12%20093722.png?raw=true)
+
+# Built with 🛠️
+
+    -ReactJs with TypeScript
+    -React-Redux
+    -Redux Toolkit
+    -Tailwind CSS
+
+#
+
+![enter image description here](https://cdn.dribbble.com/userupload/2969609/file/original-447831164cb354aacabb74dc043a1567.jpg?compress=1&resize=400x300&vertical=top)
+
+#
+
+_Preview_
+
+#
+
+![enter image description here](https://github.com/DuvanP97/api-super-heroes-catalog/blob/main/Captura%20de%20pantalla%202023-05-12%20094151.png?raw=true)
+
+![enter image description here](https://github.com/DuvanP97/api-super-heroes-catalog/blob/main/Captura%20de%20pantalla%202023-05-12%20094227.png?raw=true)
+
+![enter image description here](https://github.com/DuvanP97/api-super-heroes-catalog/blob/main/Captura%20de%20pantalla%202023-05-12%20094249.png?raw=true)
+
+![enter image description here](https://github.com/DuvanP97/api-super-heroes-catalog/blob/main/Captura%20de%20pantalla%202023-05-12%20094312.png?raw=true)
+
